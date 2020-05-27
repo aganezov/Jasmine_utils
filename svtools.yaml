@@ -1,0 +1,17 @@
+exp_name: "NA12878_ONT_PB"
+
+input:
+  - "aaa.vcf"
+  - "bbb.vcf"
+
+output_dir: "svtools_output"
+
+python: "python"
+
+svtools: "svtools"
+svtools_postp_script: "annotateSVTMerged.py"
+# percent_slop: 0.0
+fixed_slop: 1000
+
+sniffles2svtools: "sniffles2svtools.py"
+flex_ci: True

@@ -10,7 +10,9 @@ python: "python"
 
 svtools: "/scratch/groups/mschatz1/aganezov/miniconda3/envs/svtools/bin/svtools"
 svtools_postp_script: "annotateSVTMerged.py"
-# percent_slop: 0.0
+use_percent_slop: False
+percent_slop: 0.0
+use_fixed_slop: True
 fixed_slop: 1000
 
 sniffles2svtools: "sniffles2svtools.py"

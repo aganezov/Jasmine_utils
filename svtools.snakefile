@@ -42,7 +42,7 @@ rule svtools_lmerge:
     params:
         svtools=config.get("svtools", "svtools"),
         percent_slop=lambda wc: "-p " + config.get("percent_slop", "0.0") if config.get("use_percent_slop", False) else "",
-        fixed_slop=lambda wc: "-f " + config.get("fixed_slop", "1000") if config.get("use_fixed_slop", False) else "",
+        fixed_slop=lambda wc: "-f " + config.get("fixed_slop", "1000") if config.get("use_fixed_slop", True) else "",
     shell:
         "{params.svtools} lmerge -i {input} {params.percent_slop} {params.fixed_slop} > {output} 2> {log}"
 

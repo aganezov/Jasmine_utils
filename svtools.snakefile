@@ -13,7 +13,7 @@ def svtools_suite_basename(basename):
     return basename + ".svtools.vcf"
 
 rule svtools_all:
-    input: lambda wc: os.path.join(output_dir, config["exp_name"] + "svtools.lmerge.postp.vcf")
+    input: os.path.join(output_dir, config["exp_name"] + ".svtools.lmerge.postp.vcf")
 
 rule svtools_posp:
     output: os.path.join(output_dir, "{exp_name}.svtools.lmerge.postp.vcf")

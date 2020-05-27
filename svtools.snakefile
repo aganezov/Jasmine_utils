@@ -54,7 +54,7 @@ rule svtools_lsort_file_list:
     input: lambda wc: [os.path.join(output_dir, basename + ".svtools.vcf") for basename in input_files_by_core_basenames.keys()]
     run:
         with open(output[0], "wt") as dest:
-            for l in input[0]:
+            for l in input:
                 print(l, file=dest)
 
 

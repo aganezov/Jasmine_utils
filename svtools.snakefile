@@ -7,7 +7,7 @@ output_dir = os.path.join(config.get("output_dir", "svtools_output"), config["ex
 input_files_by_core_basenames = {}
 for entry in config["input"]:
     basename = os.path.basename(entry)
-    input_files_by_core_basenames[".".join(basename.split(".")[-1])] = entry
+    input_files_by_core_basenames[".".join(basename.split(".")[:-1])] = entry
 
 def svtools_suite_basename(basename):
     return basename + ".svtools.vcf"

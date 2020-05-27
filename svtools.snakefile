@@ -50,7 +50,7 @@ rule svtools_lsort:
         "{params.svtools} lsort -f {input} -r > {output} 2> {log}"
 
 rule svtools_lsort_file_list:
-    output: os.path.join(output_dir, "{exp_name}.svtools.lsort.vcf")
+    output: os.path.join(output_dir, "{exp_name}.svtools.input_vcfs.txt")
     input: lambda wc: [os.path.join(output_dir, basename + ".svtools.vcf") for basename in input_files_by_core_basenames.keys()]
     run:
         with open(output[0], "wt") as dest:

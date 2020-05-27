@@ -13,7 +13,14 @@ def svtools_suite_basename(basename):
     return basename + ".svtools.vcf"
 
 rule svtools_all:
-    input: os.path.join(output_dir, config["exp_name"] + ".svtools.lmerge.postp.vcf")
+    input: os.path.join(output_dir, config["exp_name"] + ".svtools.lmerge.postp.specific.vcf")
+
+rule svtoosl_retain_specific:
+    input: os.path.join(output_dir, "{exp_name}.svtools.lmerge.postp.vcf")
+    output: os.path.join(output_dir, "{exp_name}.svtools.lmerge.postp.specific.vcf")
+    log: os.path.join(output_dir, "log", "{exp_name}.svtools.lmerge.postp.specific.vcf.log")
+    shell:
+        "awk '($0 ~/^#/ || $0 ~/IS_SPECIFIC=1/)' {input} > {output}"
 
 rule svtools_posp:
     output: os.path.join(output_dir, "{exp_name}.svtools.lmerge.postp.vcf")

@@ -12,7 +12,7 @@ def main():
     writer = cyvcf2.Writer(args.output, reader)
     records = []
     for record in reader:
-        if "END" in record.INFO and int(record.INFO["END"]) < int(record.POS):
+        if int(record.INFO.get("END", record.POS)) < int(record.POS):
             record.INFO["END"] = str(record.POS)
         records.append(record)
     reader.close()

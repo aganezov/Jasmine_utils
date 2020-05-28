@@ -23,7 +23,7 @@ rule svtoosl_retain_specific:
         "awk '($0 ~/^#/ || $0 ~/IS_SPECIFIC=1/)' {input} > {output} 2> {log}"
 
 rule remove_bnd_duplicates:
-    input: os.path.join(output_dir, "{exp_name}.svtools.lmerge.vcf")
+    input: os.path.join(output_dir, "{exp_name}.svtools.lmerge.postp.vcf")
     output: os.path.join(output_dir, "{exp_name}.svtools.lmerge.postp.cleaned.vcf")
     log: os.path.join(output_dir, "log", "{exp_name}.svtools.lmerge.postp.cleaned.vcf.log")
     shell:

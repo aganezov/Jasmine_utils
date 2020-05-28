@@ -11,9 +11,11 @@ def main():
     reader = cyvcf2.VCF(args.vcf)
     writer = cyvcf2.Writer(args.output, reader)
     records = []
+    sample_name = reader.samples[0]
     for record in reader:
         if int(record.INFO.get("END", record.POS)) < int(record.POS):
             record.INFO["END"] = str(record.POS)
+        record.ID += f"_{sample_name}"
         records.append(record)
     reader.close()
     records = sorted(records, key=lambda r: (r.CHROM, r.POS))

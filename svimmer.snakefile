@@ -21,7 +21,7 @@ rule svimmer_posp:
     input: os.path.join(output_dir, "{exp_name}.svimmer.vcf")
 
 rule svimmer_merge:
-    output: os.path.join(output_dir, "{exp_name}.svimmer.postp.vcf")
+    output: os.path.join(output_dir, "{exp_name}.svimmer.vcf")
     input: os.path.join(output_dir, "{exp_name}.svimmer.file_list.txt")
 
 rule svimmer_file_list:

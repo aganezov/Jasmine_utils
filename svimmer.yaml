@@ -1,0 +1,9 @@
+exp_name: "NA12878_ONT_PB"
+
+output_dir: "svimmer_output"
+
+python: "python"
+
+tabix: "tabix"
+
+sniffles2svimmer: "sniffles2svimmer.py"

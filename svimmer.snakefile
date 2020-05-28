@@ -31,7 +31,7 @@ rule svimmer_file_list:
     run:
         with open(output[0], "wt") as dest:
             for l in input:
-                print(l)
+                print(l, file=dest)
 
 rule svimmer_tabix:
     output: os.path.join(output_dir,  "{basename}.vcf.gz.tbi")

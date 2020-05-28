@@ -26,8 +26,8 @@ rule svimmer_merge:
 
 rule svimmer_file_list:
     output: os.path.join(output_dir, "{exp_name}.svimmer.file_list.txt")
-    input: compressed_vcfs=lambda wc: [os.path.join(output_dir, basename + ".gz") for basename in input_files_by_core_basenames.keys()],
-           indexes=lambda wc: [os.path.join(output_dir, basename + ".gz.tbi") for basename in input_files_by_core_basenames.keys()],
+    input: compressed_vcfs=lambda wc: [os.path.join(output_dir, basename + ".vcf.gz") for basename in input_files_by_core_basenames.keys()],
+           indexes=lambda wc: [os.path.join(output_dir, basename + ".vcf.gz.tbi") for basename in input_files_by_core_basenames.keys()],
     run:
         with open(output[0], "wt") as dest:
             for l in input:

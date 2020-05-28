@@ -30,7 +30,7 @@ rule svimmer_file_list:
            indexes=lambda wc: [os.path.join(output_dir, basename + ".vcf.gz.tbi") for basename in input_files_by_core_basenames.keys()],
     run:
         with open(output[0], "wt") as dest:
-            for l in input:
+            for l in input.compressed_vcfs:
                 print(l, file=dest)
 
 rule svimmer_tabix:

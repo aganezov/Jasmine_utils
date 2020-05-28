@@ -38,7 +38,7 @@ rule survivor:
         consider_strands = 1 if config.get("consider_strands", True) else 0,
         min_sv_size = config.get("min_sv_size", 1),
     shell:
-        "{params.survivor} merge {input} {params.max_dist} {params.min_callers} {params.consider_types} {params.consider_strands} 0 {params.min_sv_size} {output} 2> {log}"
+        "{params.survivor} merge {input} {params.max_dist} {params.min_callers} {params.consider_types} {params.consider_strands} 0 {params.min_sv_size} {output} &> {log}"
 
 rule survivor_input_file_list:
     output: os.path.join(output_dir, "{exp_name}.survivor.input_vcf.txt")

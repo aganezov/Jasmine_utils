@@ -4,9 +4,10 @@ from cyvcf2 import cyvcf2
 
 
 class Sample(object):
-    __slots__ = ('chr1', 'coord1', 'chr2', 'coord2', 'strands', 'is_specific')
+    __slots__ = ('idx', 'chr1', 'coord1', 'chr2', 'coord2', 'strands', 'is_specific')
 
-    def __init__(self, chr1, coord1, chr2, coord2, strands, is_specific):
+    def __init__(self, idx, chr1, coord1, chr2, coord2, strands, is_specific):
+        self.idx = idx
         self.chr1 = chr1
         self.coord1 = coord1
         self.chr2 = chr2
@@ -35,7 +36,7 @@ def read_variants(source):
             coord2 = int(variant.INFO["END"])
         strands = variant.INFO["STRANDS"]
         is_specific = bool(int(variant.INFO.get("IS_SPECIFIC", variant.INFO.get("IN_SPECIFIC", "0"))))
-        result[(chr1, coord1, chr2, coord2)] = Sample(chr1, coord1, chr2, coord2, strands, is_specific)
+        result[(chr1, coord1, chr2, coord2)] = Sample(variant.ID, chr1, coord1, chr2, coord2, strands, is_specific)
     return sample_name, result
 
 
@@ -65,6 +66,22 @@ def is_specific_via_origin(record, variants_by_sample, samples):
     return False
 
 
+def original_ids(record, variants_by_sample, samples):
+    result = []
+    for origin_entry, sample in zip(record.format("CO"), samples):
+        if origin_entry.lower() == "nan":
+            continue
+        origin_entries = origin_entry.split(",")
+        for origin in origin_entries:
+            data1, data2 = origin.split("-")
+            chr1, coord1 = data1.split("_")
+            chr2, coord2 = data2.split("_")
+            coord1, coord2 = int(coord1), int(coord2)
+            original_variant = variants_by_sample[sample][(chr1, coord1, chr2, coord2)]
+            result.append(f"{sample}:{original_variant.idx}")
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file-list", type=argparse.FileType("rt"), required=True)
@@ -91,12 +108,20 @@ def main():
         "Type": "String",
         "Number": "1",
     })
+    reader.add_info_to_header({
+        "ID": "MERGED_IDS",
+        "Description": "':'-separated sample:id values for the merged variants",
+        "Type": "String",
+        "Number": ".",
+    })
     writer = cyvcf2.Writer(args.output, reader)
     for record in reader:
         is_specific = str(int(is_specific_via_origin(record, variants_by_sample, samples)))
         supp_mvec = get_supp_mvector(record)
+        origin_ids = original_ids(record, variants_by_sample, samples)
         record.INFO["SUPP_MVEC"] = supp_mvec
         record.INFO["IS_SPECIFIC"] = is_specific
+        record.INFo["MERGED_IDS"] = ",".join(origin_ids)
         writer.write_record(record)
     reader.close()
     writer.close()

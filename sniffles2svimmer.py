@@ -15,7 +15,7 @@ def main():
     for record in reader:
         if int(record.INFO.get("END", record.POS)) < int(record.POS):
             record.INFO["END"] = str(record.POS)
-        record.ID += f"_{sample_name}"
+        record.ID = f"{sample_name}:{record.ID}"
         records.append(record)
     reader.close()
     records = sorted(records, key=lambda r: (r.CHROM, r.POS))

@@ -121,7 +121,7 @@ def main():
         origin_ids = original_ids(record, variants_by_sample, samples)
         record.INFO["SUPP_MVEC"] = supp_mvec
         record.INFO["IS_SPECIFIC"] = is_specific
-        record.INFo["MERGED_IDS"] = ",".join(origin_ids)
+        record.INFO["MERGED_IDS"] = ",".join(origin_ids)
         writer.write_record(record)
     reader.close()
     writer.close()

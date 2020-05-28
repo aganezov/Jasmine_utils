@@ -34,7 +34,7 @@ rule svimmer_file_list:
                 print(l)
 
 rule svimmer_tabix:
-    output: os.path.join(output_dir,  "{basename}.vcf.gz")
+    output: os.path.join(output_dir,  "{basename}.vcf.gz.tbi")
     input: os.path.join(output_dir,  "{basename}.vcf")
     log: os.path.join(output_dir, "log", "{basename}.vcf.gz.log")
     params:

@@ -1,0 +1,17 @@
+exp_name: "NA12878_ONT_PB"
+
+input:
+  - "aaa.vcf"
+  - "bbb.vcf"
+
+output_dir: "survivor_output"
+
+python: "python"
+
+survivor: "/work-zfs/mschatz1/pipelines/soft/SURVIVOR"
+annotateSurvivorMerged: "annotateSurvivorMerged.py"
+max_dist: 1000
+min_callers: 0
+consider_types: True
+consider_strands: True
+min_sv_size: 1

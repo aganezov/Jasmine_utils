@@ -29,7 +29,8 @@ rule svimmer_posp:
         svimmer_postp_script=config.get("svimmer_postp_script", "annotateMerged.py"),
     shell:
         "{params.python} {params.svimmer_postp_script} -f {input.vcf_list_file} "
-        "-m {input.merged_vcf} --merged-ids-field MERGED_IDS -o {output} &> {log}"
+        "-m {input.merged_vcf} --merged-ids-field MERGED_IDS --no-id-split "
+        "-o {output} &> {log}"
 
 
 rule svimmer_merge:

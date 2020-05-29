@@ -10,6 +10,7 @@ def main():
     parser.add_argument("-f", "--file-list", type=argparse.FileType("rt"), required=True)
     parser.add_argument("-m", "--merged-vcf", type=str, required=True)
     parser.add_argument("--merged-ids-field", type=str, required=True)
+    parser.add_argument("--no-id-split", action="store_false", dest="split_id")
     parser.add_argument("-o", "--output", type=str, required=True)
     args = parser.parse_args()
     samples = []
@@ -40,7 +41,7 @@ def main():
     })
     writer = cyvcf2.Writer(args.output, reader)
     for record in reader:
-        is_specific = str(int(is_specific_via_origin(record, variants_by_sample, args.merged_ids_field)))
+        is_specific = str(int(is_specific_via_origin(record, variants_by_sample, args.merged_ids_field, split_id=args.split_id)))
         supp_mvec = get_supp_mvector(record, samples, args.merged_ids_field)
         record.INFO["SUPP_MVEC"] = supp_mvec
         record.INFO["IS_SPECIFIC"] = is_specific

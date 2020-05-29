@@ -9,7 +9,7 @@ output_dir: "svtools_output"
 python: "python"
 
 svtools: "/scratch/groups/mschatz1/aganezov/miniconda3/envs/svtools/bin/svtools"
-svtools_postp_script: "annotateSVTMerged.py"
+svtools_postp_script: "annotateMerged.py"
 use_percent_slop: False
 percent_slop: 0.0
 use_fixed_slop: True

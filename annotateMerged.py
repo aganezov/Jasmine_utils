@@ -1,23 +1,15 @@
 import argparse
-from collections import defaultdict
 
-import cyvcf2 as cyvcf2
+from cyvcf2 import cyvcf2
 
-from utils import read_variants, get_supp_vector, is_specific_via_origin
-
-
-def get_supp_mvector(record, samples):
-    result = defaultdict(int)
-    for entry in record.INFO["SNAME"].split(","):
-        sample, idx = entry.split(":")
-        result[sample] += 1
-    return "".join([str(result[sample]) for sample in samples])
+from utils import read_variants, is_specific_via_origin, get_supp_vector, get_supp_mvector
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", "--file-list", type=argparse.FileType("rt"), required=True)
     parser.add_argument("-m", "--merged-vcf", type=str, required=True)
+    parser.add_argument("--merged-ids-field", type=str, required=True)
     parser.add_argument("-o", "--output", type=str, required=True)
     args = parser.parse_args()
     samples = []
@@ -48,15 +40,14 @@ def main():
     })
     writer = cyvcf2.Writer(args.output, reader)
     for record in reader:
-        is_specific = str(int(is_specific_via_origin(record, variants_by_sample, "SNAME")))
-        supp_mvec = get_supp_mvector(record, samples)
+        is_specific = str(int(is_specific_via_origin(record, variants_by_sample, args.merged_ids_field)))
+        supp_mvec = get_supp_mvector(record, samples, args.merged_ids_field)
         record.INFO["SUPP_MVEC"] = supp_mvec
         record.INFO["IS_SPECIFIC"] = is_specific
         record.INFO["SUPP_VEC"] = get_supp_vector(supp_mvec)
         writer.write_record(record)
     reader.close()
     writer.close()
-
 
 if __name__ == "__main__":
     main()

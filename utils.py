@@ -1,3 +1,5 @@
+from collections import defaultdict
+
 import cyvcf2 as cyvcf2
 
 
@@ -30,3 +32,11 @@ def is_specific_via_origin(record, variants_by_sample, merged_field):
         if variants_by_sample[sample][idx].specific:
             return True
     return False
+
+
+def get_supp_mvector(record, samples, merged_field):
+    result = defaultdict(int)
+    for entry in record.INFO[merged_field].split(","):
+        sample, idx = entry.split(":")
+        result[sample] += 1
+    return "".join([str(result[sample]) for sample in samples])

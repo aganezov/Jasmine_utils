@@ -7,3 +7,35 @@ python: "python"
 tabix: "tabix"
 
 sniffles2svimmer: "sniffles2svimmer.py"
+
+svimmer: "/work-zfs/mschatz1/pipelines/soft/svimmer/svimmer"
+max_distance: 1000
+max_size_difference: 1000
+consider_types: True
+
+svimmer_postp_script: "annotateMerged.py"
+chromosomes:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 12
+  - X
+  - Y
+  - MT

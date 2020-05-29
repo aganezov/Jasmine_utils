@@ -1,9 +1,3 @@
-exp_name: "NA12878_ONT_PB"
-
-input:
-  - "aaa.vcf"
-  - "bbb.vcf"
-
 output_dir: "svtools_output"
 
 python: "python"

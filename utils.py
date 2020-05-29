@@ -26,9 +26,11 @@ def get_supp_vector(supp_mvec):
     return "".join(["1" if int(value) > 0 else "0" for value in supp_mvec])
 
 
-def is_specific_via_origin(record, variants_by_sample, merged_field):
+def is_specific_via_origin(record, variants_by_sample, merged_field, split_id=True):
     for entry in record.INFO[merged_field].split(","):
         sample, idx = entry.split(":")
+        if not split_id:
+            idx = entry
         if variants_by_sample[sample][idx].specific:
             return True
     return False

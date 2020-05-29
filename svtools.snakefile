@@ -36,7 +36,7 @@ rule svtools_posp:
     log: os.path.join(output_dir, "log", "{exp_name}.svtools.lmerge.postp.vcf.log")
     params:
         python=config.get("python", "python"),
-        svtools_postp_script=config.get("annotateSVTools", "annotateMerged.py"),
+        svtools_postp_script=config.get("svtools_postp_script", "annotateMerged.py"),
     shell:
          "{params.python} {params.svtools_postp_script} -f {input.vcf_list_file} "
          "-m {input.merged_vcf} --merged-ids-field SNAME -o {output} &> {log}"

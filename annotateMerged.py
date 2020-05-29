@@ -39,6 +39,12 @@ def main():
         "Type": "String",
         "Number": "1",
     })
+    reader.add_info_to_header({
+        "ID": "IN_SPECIFIC",
+        "Description": "Whether or not a variant has enough read support and length to be specific. Older version.",
+        "Type": "String",
+        "Number": "1",
+    })
     writer = cyvcf2.Writer(args.output, reader)
     for record in reader:
         is_specific = str(int(is_specific_via_origin(record, variants_by_sample, args.merged_ids_field, split_id=args.split_id)))
@@ -49,6 +55,7 @@ def main():
         writer.write_record(record)
     reader.close()
     writer.close()
+
 
 if __name__ == "__main__":
     main()

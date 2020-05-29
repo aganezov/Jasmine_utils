@@ -48,7 +48,7 @@ def main():
     })
     writer = cyvcf2.Writer(args.output, reader)
     for record in reader:
-        is_specific = str(int(is_specific_via_origin(record, variants_by_sample)))
+        is_specific = str(int(is_specific_via_origin(record, variants_by_sample, "SNAME")))
         supp_mvec = get_supp_mvector(record, samples)
         record.INFO["SUPP_MVEC"] = supp_mvec
         record.INFO["IS_SPECIFIC"] = is_specific

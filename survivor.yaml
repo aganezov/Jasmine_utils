@@ -1,4 +1,4 @@
-output_dir: "survivor_output"
+survivor_output_dir: "survivor_output"
 
 python: "python"
 

@@ -1,4 +1,4 @@
-output_dir: "svimmer_output"
+svimmer_output_dir: "svimmer_output"
 
 python: "python"
 

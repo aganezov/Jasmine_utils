@@ -2,7 +2,7 @@ import os
 
 configfile: "svimmer.yaml"
 
-output_dir = os.path.join(config.get("output_dir", "svimmer_output"), config["exp_name"])
+output_dir = os.path.join(config.get("svimmer_output_dir", "svimmer_output"), config["exp_name"])
 
 input_files_by_core_basenames = {}
 for entry in config["input"]:

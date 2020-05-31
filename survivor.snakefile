@@ -2,7 +2,7 @@ import os
 
 configfile: "survivor.yaml"
 
-output_dir = os.path.join(config.get("output_dir", "survivor_output"), config["exp_name"])
+output_dir = os.path.join(config.get("survivor_output_dir", "survivor_output"), config["exp_name"])
 
 rule survivor_all:
     input: os.path.join(output_dir, config["exp_name"] + ".survivor.postp.specific.vcf")

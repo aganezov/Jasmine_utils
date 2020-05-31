@@ -1,4 +1,4 @@
-output_dir: "svtools_output"
+svtools_output_dir: "svtools_output"
 
 python: "python"
 

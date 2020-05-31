@@ -4,6 +4,7 @@ configfile: "survivor.yaml"
 
 exp_name = config["exp_name"]
 output_dir = os.path.join(config.get("output_dir", "jasmine_eval"), exp_name)
+benchmark_iter_cnt = config.get("bench_rep", 5)
 
 rule survivor_all:
     input: os.path.join(output_dir, exp_name + ".survivor.postp.specific.vcf")
@@ -30,7 +31,7 @@ rule survivor:
     output: os.path.join(output_dir, "{exp_name," + exp_name + "}.survivor.vcf")
     input: os.path.join(output_dir, "{exp_name}.survivor.input_vcf.txt")
     log: os.path.join(output_dir, "log", "{exp_name}.survivor.vcf.log")
-    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.survivor.txt"), 5)
+    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.survivor.txt"), benchmark_iter_cnt)
     params:
         survivor = config.get("survivor", "SURVIVOR"),
         max_dist = config.get("max_dist", 1000),

@@ -4,6 +4,7 @@ configfile: "svtools.yaml"
 
 exp_name = config["exp_name"]
 output_dir = os.path.join(config.get("output_dir", "jasmine_eval"), exp_name)
+benchmark_iter_cnt = config.get("bench_rep", 5)
 
 input_files_by_core_basenames = {}
 for entry in config["input"]:
@@ -46,7 +47,7 @@ rule svtools_lmerge:
     output: os.path.join(output_dir, "{exp_name," + exp_name + "}.svtools.lmerge.vcf")
     input: os.path.join(output_dir, "{exp_name}.svtools.lsort.vcf")
     log: os.path.join(output_dir, "log", "{exp_name}.svtools.lmerge.vcf.log")
-    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.svtools.lmerge.txt"), 5)
+    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.svtools.lmerge.txt"), benchmark_iter_cnt)
     params:
         svtools=config.get("svtools", "svtools"),
         percent_slop=lambda wc: "-p " + str(config.get("percent_slop", "0.0")) if config.get("use_percent_slop", False) else "",
@@ -58,7 +59,7 @@ rule svtools_lsort:
     output: os.path.join(output_dir, "{exp_name," + exp_name + "}.svtools.lsort.vcf")
     input: os.path.join(output_dir, "{exp_name}.svtools.input_vcfs.txt")
     log: os.path.join(output_dir, "log", "{exp_name}.svtools.lsort.vcf.log")
-    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.svtools.lsort.txt"), 5)
+    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.svtools.lsort.txt"), benchmark_iter_cnt)
     params:
         svtools=config.get("svtools", "svtools"),
     shell:

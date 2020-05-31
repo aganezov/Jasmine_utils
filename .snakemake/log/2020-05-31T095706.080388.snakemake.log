@@ -1,0 +1,3 @@
+KeyError in line 3 of /Users/aganezov/research/Jasmine_utils/all.snakefile:
+'exp_name'
+  File "/Users/aganezov/research/Jasmine_utils/all.snakefile", line 3, in <module>

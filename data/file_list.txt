@@ -1,0 +1,2 @@
+NA12878_ONT_sniffles.s2l20.refined_normalizeTypes.vcf
+NA12878_PB_sniffles.s2l20.refined_normalizeTypes.vcf

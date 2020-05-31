@@ -1,5 +1,3 @@
-svtools_output_dir: "svtools_output"
-
 python: "python"
 
 svtools: "/scratch/groups/mschatz1/aganezov/miniconda3/envs/svtools/bin/svtools"

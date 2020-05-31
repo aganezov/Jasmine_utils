@@ -1,5 +1,3 @@
-survivor_output_dir: "survivor_output"
-
 python: "python"
 
 survivor: "/work-zfs/mschatz1/pipelines/soft/SURVIVOR"

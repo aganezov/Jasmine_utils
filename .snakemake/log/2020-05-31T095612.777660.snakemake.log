@@ -1,0 +1,5 @@
+TypeError in line 4 of /Users/aganezov/research/Jasmine_utils/all.snakefile:
+join() argument must be str or bytes, not 'NoneType'
+  File "/Users/aganezov/research/Jasmine_utils/all.snakefile", line 4, in <module>
+  File "/Users/aganezov/miniconda/envs/bio/lib/python3.6/posixpath.py", line 94, in join
+  File "/Users/aganezov/miniconda/envs/bio/lib/python3.6/genericpath.py", line 149, in _check_arg_types

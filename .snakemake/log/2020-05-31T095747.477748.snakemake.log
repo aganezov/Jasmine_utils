@@ -1,0 +1,4 @@
+Building DAG of jobs...
+MissingInputException in line 6 of /Users/aganezov/research/Jasmine_utils/all.snakefile:
+Missing input files for rule all:
+jasmine_eval/test_exp/test_exp.jasmine.specific.vcf

@@ -21,7 +21,7 @@ rule jasmine_merge:
     input: os.path.join(output_dir, "{exp_name}.jasmine.file_list.txt")
     log: os.path.join(output_dir, "log", "{exp_name}.jasmine.vcf.log")
     threads: 24
-    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.jasmine.vcf"), benchmark_iter_cnt)
+    benchmark: repeat(os.path.join(output_dir, "benchmark", "{exp_name}.jasmine.txt"), benchmark_iter_cnt)
     params:
         java=config.get("java", "java"),
         java_cp=config.get("java_cp", ""),

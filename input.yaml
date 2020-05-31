@@ -1,0 +1,23 @@
+#############
+# MANDATORY #
+#############
+exp_name: "test_exp"
+input:
+  - "data/test1.vcf"
+  - "data/test2.vcf"
+
+############
+# OPTIONAL #
+############
+output_dir: "jasmine_eval"  # this is the default value
+
+# this is the default list
+# if a sublist specified, only specified elements will be considered
+# for single method entry runs, consider using respective method-specific snakefiles
+tools_enabled:
+  - "svtools"
+  - "svimmer"
+  - "survivor"
+  - "jasmine"
+
+bench_rep: 5 # this is the default value

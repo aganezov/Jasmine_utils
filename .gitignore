@@ -2,3 +2,5 @@
 .idea/
 !data/*
 data/test[12].vcf
+.snakemake/
+__pycache__/

@@ -77,7 +77,7 @@ rule svtools_lsort_file_list:
 rule svtools_suite:
     output: os.path.join(output_dir, "{core_basename," + basename_regex + "}.svtools.vcf")
     input: lambda wc: input_files_by_core_basenames[wc.core_basename]
-    log: os.path.join(output_dir, "log", os.path.join(output_dir, "{core_basename}.svtools.vcf.log"))
+    log: os.path.join(output_dir, "log", "{core_basename}.svtools.vcf.log")
     params:
         python=config.get("python", "python"),
         sniffles2svtools=config.get("sniffles2svtools", "sniffles2svtools.py"),

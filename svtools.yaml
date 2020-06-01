@@ -5,7 +5,7 @@ svtools_postp_script: "annotateMerged.py"
 use_percent_slop: False
 percent_slop: 0.0
 use_fixed_slop: True
-fixed_slop: 1000
+fixed_slop: 250
 
 sniffles2svtools: "sniffles2svtools.py"
 flex_ci: True

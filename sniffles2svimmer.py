@@ -14,7 +14,7 @@ def main():
     sample_name = reader.samples[0]
     for record in reader:
         if int(record.INFO.get("END", record.POS)) < int(record.POS):
-            record.INFO["END"] = str(record.POS)
+            record.INFO["END"] = int(str(record.POS))
         record.ID = f"{sample_name}:{record.ID}"
         records.append(record)
     reader.close()
